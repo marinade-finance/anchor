@@ -573,11 +573,11 @@ fn build_cwd_verifiable(
     }
 
     // Build the idl.
-    if let Ok(Some(idl)) = extract_idl("src/lib.rs") {
+    /* if let Ok(Some(idl)) = extract_idl("src/lib.rs") {
         println!("Extracting the IDL");
         let out_file = workspace_dir.join(format!("target/idl/{}.json", idl.name));
         write_idl(&idl, OutFile::File(out_file))?;
-    }
+    }*/
 
     result
 }
@@ -807,6 +807,9 @@ fn verify(
     if !bin_ver.is_verified {
         println!("Error: Binaries don't match");
         std::process::exit(1);
+    } else {
+        println!("OK: Binaries matches");
+        return Ok(())
     }
 
     // Verify IDL (only if it's not a buffer account).
